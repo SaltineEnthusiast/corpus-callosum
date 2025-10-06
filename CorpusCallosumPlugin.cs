@@ -19,15 +19,24 @@ public partial class CorpusCallosumPlugin : BaseUnityPlugin
         Harmony.CreateAndPatchAll(typeof(CorpusCallosumPlugin));
         if (!Enum.IsDefined(typeof(CrestType), "Weaver"))
         {
-            int NewValue = Enum.GetValues(typeof(CrestType)).Length;
-            CrestType Weaver = (CrestType)NewValue;
+
+            //int NewValue = Enum.GetValues(typeof(CrestType)).Length;
+            //Logger.LogInfo($"Amount of crests: {NewValue}");
+            //CrestType Weaver = (CrestType)NewValue;
             Logger.LogInfo($"{Name}({Id}) Weaver crest has loaded");
         }
         else
         {
             Logger.LogInfo($"{Name}({Id}) Weaver crest couldn't load");
         }
-        Logger.LogInfo($"Crest list: {Enum.GetValues(typeof(CrestType))}");
+        foreach (CrestType crest in Enum.GetValues(typeof(CrestType)))
+        {
+            Logger.LogInfo($"Global Enum: {crest}");
+        }
+        foreach (SaveProfileHealthBar.CrestTypes crest in Enum.GetValues(typeof(SaveProfileHealthBar.CrestTypes)))
+        {
+            Logger.LogInfo($"Save Profile HealthBar Enum: {crest}");
+        }
     }
 
     /*
