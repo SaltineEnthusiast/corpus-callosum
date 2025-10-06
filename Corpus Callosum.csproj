@@ -37,8 +37,12 @@
     <Folder Include="Assets\Enemies\Servitor Guard\" />
     <Folder Include="Assets\Enemies\Znachkrabb\" />
     <Folder Include="Assets\Items\" />
+    <Folder Include="Assets\WeaverCrest\SlashEffects\Base\" />
+    <Folder Include="Assets\WeaverCrest\SlashEffects\Alt\" />
+    <Folder Include="Assets\WeaverCrest\SlashEffects\Downslash\" />
+    <Folder Include="Assets\WeaverCrest\SlashEffects\Dashstab\" />
+    <Folder Include="Assets\WeaverCrest\SlashEffects\Up\" />
     <Folder Include="Assets\World\" />
-    <Folder Include="Assets\WeaverCrest\" />
   </ItemGroup>
 
   <Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="'$(SilksongFolder)' != ''">

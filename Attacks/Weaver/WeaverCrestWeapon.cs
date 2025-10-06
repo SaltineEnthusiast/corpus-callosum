@@ -104,7 +104,7 @@ namespace Corpus_Callosum.Attacks.Weaver
 
             //Downslash
             GameObject weaverdownslash = CrestManager.CloneSlashObject(wanderer.Child("DownSlash"), weaverRoot);
-            WeaverBaseSlash weaverdownslash = new WeaverBaseSlash
+            WeaverBaseSlash weaverdownspike = new WeaverBaseSlash
             {
                 SlashObject = weaverdownslash,
                 SlashAnimatorObject = AnimManager.WeaverCrestAnimator,
@@ -113,7 +113,7 @@ namespace Corpus_Callosum.Attacks.Weaver
                 LocalPosition = new UnityEngine.Vector3(),
                 LocalScale = new UnityEngine.Vector3(1.1f, 1f, 1)
             };
-            weaverdownslash.SetupSlash();
+            weaverdownspike.SetupSlash();
             objectInfo.slashDownObject = weaverdownslash;
         }
     }

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-/* Currently testing if WeaverDownspike or WeaverDownslash is more important
 namespace Corpus_Callosum.Attacks.Weaver
 {
     public class WeaverDownspike

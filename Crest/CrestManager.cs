@@ -44,7 +44,7 @@ namespace Corpus_Callosum.Crest
             GameObject clonedSlash = UnityEngine.Object.Instantiate(slashToClone);
             clonedSlash.transform.parent = slashRoot.transform;
             clonedSlash.transform.localPosition = new Vector3(0, 0, -0.001f);
-            Downslash slash = clonedSlash.GetComponent<Downslash>();
+            Downspike slash = clonedSlash.GetComponent<Downspike>();
             slash.heroCtrl = HeroController.instance;
             //Helper.SetPrivateField(slash, nameof(slash.hc), HeroController.instance);
             slash.enabled = true;

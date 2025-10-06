@@ -69,8 +69,8 @@ namespace Corpus_Callosum.Attacks.Weaver
                 HeroController.instance.SetStartWithHarpoonBounce();
                 HeroController.instance.RegainControl();
                 HeroController.instance.AffectedByGravity(true);
-                HeroController.instance.StartDownslashInvulnerability();
-                //HeroController.instance.DownslashBounce(false);
+                HeroController.instance.StartDownspikeInvulnerability();
+                //HeroController.instance.DownspikeBounce(false);
 
             });
 
