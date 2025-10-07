@@ -1,11 +1,13 @@
-﻿using Corpus_Callosum.Crest;
+﻿using Corpus_Callosum.AnimHandler;
+using Corpus_Callosum.Crest;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using TeamCherry.Localization;
 using UnityEngine;
-using Corpus_Callosum.AnimHandler;
+using static PlayerDataTest;
+using weaverCrest = Corpus_Callosum.Crest.WeaverCrest;
 
 namespace Corpus_Callosum;
 
@@ -66,30 +68,23 @@ public static class Patches
         }
     }
 
-    //Hit instance for style meter
-    [HarmonyPatch(typeof(HealthManager), nameof(HealthManager.TakeDamage))]
+    [HarmonyPatch(typeof(HeroController), nameof(HeroController.instance.BindCompleted), MethodType.Getter)]
     [HarmonyPostfix]
-    private static void SendHitToManager(HitInstance hitInstance)
+    private static void WeaverSilkRefund(HeroController __instance)
     {
-        if (HeroController.instance == null) { return; }
-
-        WeaverCrestHandler handler = HeroController.instance.GetComponent<WeaverCrestHandler>();
-        if (handler == null) { return; }
-
-        handler.HitLanded(hitInstance);
+        if (PlayerData.instance.CurrentCrestID == "Weaver")
+        {
+            __instance.AddSilk(4, true, SilkSpool.SilkAddSource.Normal);
+        }
     }
 
-    //got hit for style meter
-    [HarmonyPatch(typeof(HeroController), nameof(HeroController.instance.TakeDamage), typeof(GameObject), typeof(GlobalEnums.CollisionSide), typeof(int), typeof(GlobalEnums.HazardType), typeof(GlobalEnums.DamagePropertyFlags))]
+    [HarmonyPatch(typeof(HeroController), nameof(HeroController.instance.NailHitEnemy), MethodType.Getter)]
     [HarmonyPostfix]
-    private static void SendGotHitToManager()
+    private static void WeaverSilkGain(HeroController __instance)
     {
-        if (HeroController.instance == null) { return; }
-
-        WeaverCrestHandler handler = HeroController.instance.GetComponent<WeaverCrestHandler>();
-        if (handler == null) { return; }
-
-        handler.GotHit();
+        if (PlayerData.instance.CurrentCrestID == "Weaver")
+        {
+            __instance.AddSilk(1, true, SilkSpool.SilkAddSource.Normal);
+        }
     }
-
 }

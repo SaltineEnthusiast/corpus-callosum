@@ -11,6 +11,7 @@ using System.Reflection;
 using TeamCherry.Localization;
 using UnityEngine;
 using static ToolCrest;
+using HarmonyLib;
 
 namespace Corpus_Callosum.Crest
 {
@@ -87,6 +88,31 @@ namespace Corpus_Callosum.Crest
             //Reference reaper to make it :)
             weaverConfig.heroAnimOverrideLib = AnimManager.WeaverCrestAnimator.GetComponent<tk2dSpriteAnimator>().Library;
 
+            /* BLANK SLATE SO THAT YOU CAN JUST DOUBLE CLICK or Ctrl+F ( TO FILL IN THE VALUES INSTEAD OF LOOKING THROUGH THE OLD TEXT TO DELETE THE ONES
+            cRESTNAME = new cRESTCLASS()
+            {
+                name = "cRESTNAME", //
+                crestGlow = crestGlow,
+                crestSilhouette = crestSilhouette,
+                crestSprite = crestSprite,
+                heroControllerConfig = cONFIGNAME, //
+                isUnlocked = true,
+                activeRootObject = cRESTROOT, //
+                keySheet = "CORPUS",
+                nameKey = "cRESTNAMEKEY", //
+                descKey = "cRESTDESCKEY", //
+            };
+            // Idx Ref   :  x0  x1  x2  x3  x4  x5  x6
+            // Up Idx    :  
+            // Down Idx  :
+            // Left Idx  :
+            // Right Idx :
+
+            cRESTNAME.RegisterSlot();
+            cRESTNAME.RegisterSlot();
+            cRESTNAME.RegisterSlot();
+            cRESTNAME.RegisterSlot();
+            */
 
             weaverCrest = new WeaverCrest()
             {
@@ -98,9 +124,33 @@ namespace Corpus_Callosum.Crest
                 isUnlocked = true,
                 activeRootObject = weaverRoot,
                 keySheet = "CORPUS",
-                nameKey = "WEAVERCRESTNAME",
-                descKey = "WEAVERCRESTDESC"
+                nameKey = "WEAVERCREST",
+                descKey = "WEAVERCRESTDESC",
             };
+            // Idx Ref   :  x0  x1  x2  x3  x4  x5  x6
+            // Up Idx    :  s3 y2b2 s1 b1y1 s2
+            // Down Idx  :  s2 b1y2 s1 y2b2 s3
+            // Left Idx  : b1y2 s  b2y1
+            // Right Idx : b2y1 s  b1y2
+
+            // \===s2===/ //
+            // /========\ //
+            // b1 |  | y1 //
+            //    |s1|    //
+            // y2 |  | b2 //
+            // \========/ //
+            // /===s3===\ //
+
+            // Directionals
+            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Skill, AttackToolBinding.Neutral, 2, 2, 1, 1, 0, 4, 0, 2, true); // s1
+            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Skill, AttackToolBinding.Up, 4, 0, 1, 1, 0, 4, 0, 2, false); // s2
+            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Skill, AttackToolBinding.Down, 0, 4, 1, 1, 0, 4, 0, 2, false); // s3
+            // Blue
+            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Blue, AttackToolBinding.Neutral, 3, 1, 0, 2, 0, 4, 0, 2, false); // b1
+            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Blue, AttackToolBinding.Neutral, 1, 3, 2, 0, 0, 4, 0, 2, true); // b2
+            // Yellow
+            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Yellow, AttackToolBinding.Neutral, 1, 3, 2, 0, 0, 4, 0, 2, false); // y1
+            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Yellow, AttackToolBinding.Neutral, 3, 1, 0, 2, 0, 4, 0, 2, true); // y2
 
             RegisterCrest(weaverCrest);
 
@@ -130,8 +180,10 @@ namespace Corpus_Callosum.Crest
             crestData.displayName = namestring;
             crestData.description = descstring;
 
-            //For now, i'm ignoring slots.
-            crestData.slots = new SlotInfo[0];
+            foreach (ToolCrest.SlotInfo slot in crest.slots)
+            {
+                crestData.slots.AddItem(slot);
+            }
 
             crestData.SaveData = new ToolCrestsData.Data
             {
