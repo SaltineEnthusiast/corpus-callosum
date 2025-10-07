@@ -14,12 +14,12 @@ namespace Corpus_Callosum
 
         public static void Init()
         {
-            LoadBundle();
+            LoadWeaverCrestBundle();
         }
 
-        private static void LoadBundle()
+        private static void LoadWeaverCrestBundle()
         {
-            string resourceName = "CORPUS.Assets.corpusbundle.bundle";
+            string resourceName = "CORPUS.Assets.WeaverCrest.corpusbundle.bundle";
 
             using Stream stream = Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream(resourceName);

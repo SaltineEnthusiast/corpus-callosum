@@ -42,6 +42,11 @@
     <Folder Include="Assets\WeaverCrest\SlashEffects\Downslash\" />
     <Folder Include="Assets\WeaverCrest\SlashEffects\Dashstab\" />
     <Folder Include="Assets\WeaverCrest\SlashEffects\Up\" />
+    <Folder Include="Assets\WeaverCrest\Slashes\DashstabAntic\" />
+    <Folder Include="Assets\WeaverCrest\Slashes\Dashstab\" />
+    <Folder Include="Assets\WeaverCrest\Slashes\Downslash\" />
+    <Folder Include="Assets\WeaverCrest\Slashes\DownslashAntic\" />
+    <Folder Include="Assets\WeaverCrest\Slashes\Basic\" />
     <Folder Include="Assets\World\" />
   </ItemGroup>
 
