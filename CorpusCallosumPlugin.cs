@@ -39,6 +39,11 @@ public partial class CorpusCallosumPlugin : BaseUnityPlugin
         }
     }
 
+    public void Log(string text)
+    {
+        Logger.LogInfo($"{text}");
+    }
+
     /*
     [HarmonyPostfix]
     [HarmonyPatch(typeof(HeroController), "Dash")]

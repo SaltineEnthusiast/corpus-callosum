@@ -37,6 +37,7 @@
     <Folder Include="Assets\Enemies\Servitor Guard\" />
     <Folder Include="Assets\Enemies\Znachkrabb\" />
     <Folder Include="Assets\Items\" />
+    <Folder Include="Assets\WeaverCrest\UI\" />
     <Folder Include="Assets\WeaverCrest\SlashEffects\Base\" />
     <Folder Include="Assets\WeaverCrest\SlashEffects\Alt\" />
     <Folder Include="Assets\WeaverCrest\SlashEffects\Downslash\" />

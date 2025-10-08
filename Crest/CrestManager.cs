@@ -88,7 +88,7 @@ namespace Corpus_Callosum.Crest
             //Reference reaper to make it :)
             weaverConfig.heroAnimOverrideLib = AnimManager.WeaverCrestAnimator.GetComponent<tk2dSpriteAnimator>().Library;
 
-            /* BLANK SLATE SO THAT YOU CAN JUST DOUBLE CLICK or Ctrl+F ( TO FILL IN THE VALUES INSTEAD OF LOOKING THROUGH THE OLD TEXT TO DELETE THE ONES
+            /* BLANK SLATE SO THAT YOU CAN JUST DOUBLE CLICK OR Ctrl+F TO FILL IN THE VALUES INSTEAD OF LOOKING THROUGH THE OLD TEXT TO DELETE THE ONES
             cRESTNAME = new cRESTCLASS()
             {
                 name = "cRESTNAME", //
@@ -143,14 +143,14 @@ namespace Corpus_Callosum.Crest
 
             // Directionals
             weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Skill, AttackToolBinding.Neutral, 2, 2, 1, 1, 0, 4, 0, 2, true); // s1
-            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Skill, AttackToolBinding.Up, 4, 0, 1, 1, 0, 4, 0, 2, false); // s2
-            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Skill, AttackToolBinding.Down, 0, 4, 1, 1, 0, 4, 0, 2, false); // s3
+            weaverCrest.RegisterSlot(new Vector2(0, 400), ToolItemType.Skill, AttackToolBinding.Up, 4, 0, 1, 1, 0, 4, 0, 2, false); // s2
+            weaverCrest.RegisterSlot(new Vector2(0, -400), ToolItemType.Skill, AttackToolBinding.Down, 0, 4, 1, 1, 0, 4, 0, 2, false); // s3
             // Blue
-            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Blue, AttackToolBinding.Neutral, 3, 1, 0, 2, 0, 4, 0, 2, false); // b1
-            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Blue, AttackToolBinding.Neutral, 1, 3, 2, 0, 0, 4, 0, 2, true); // b2
+            weaverCrest.RegisterSlot(new Vector2(-200, 200), ToolItemType.Blue, AttackToolBinding.Neutral, 3, 1, 0, 2, 0, 4, 0, 2, false); // b1
+            weaverCrest.RegisterSlot(new Vector2(200, -200), ToolItemType.Blue, AttackToolBinding.Neutral, 1, 3, 2, 0, 0, 4, 0, 2, true); // b2
             // Yellow
-            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Yellow, AttackToolBinding.Neutral, 1, 3, 2, 0, 0, 4, 0, 2, false); // y1
-            weaverCrest.RegisterSlot(new Vector2(0, 0), ToolItemType.Yellow, AttackToolBinding.Neutral, 3, 1, 0, 2, 0, 4, 0, 2, true); // y2
+            weaverCrest.RegisterSlot(new Vector2(200, -200), ToolItemType.Yellow, AttackToolBinding.Neutral, 1, 3, 2, 0, 0, 4, 0, 2, false); // y1
+            weaverCrest.RegisterSlot(new Vector2(-200, 200), ToolItemType.Yellow, AttackToolBinding.Neutral, 3, 1, 0, 2, 0, 4, 0, 2, true); // y2
 
             RegisterCrest(weaverCrest);
 
@@ -165,6 +165,8 @@ namespace Corpus_Callosum.Crest
             crestData.crestGlow = crest.crestGlow;
             crestData.crestSilhouette = crest.crestSilhouette;
             crestData.heroConfig = crest.heroControllerConfig;
+
+            crestData.isHidden = false;
 
 
             LocalisedString namestring = new LocalisedString()
@@ -210,6 +212,8 @@ namespace Corpus_Callosum.Crest
 
             //Finishing touches
             crest.crest = crestData;
+            if (crestData.name == "Weaver") { Globals.Weaver = crestData; }
+            Globals.Logger.Log("Weaver crest finished");
         }
     }
 }

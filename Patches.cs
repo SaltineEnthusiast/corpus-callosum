@@ -9,6 +9,7 @@ using UnityEngine;
 using static PlayerDataTest;
 using weaverCrest = Corpus_Callosum.Crest.WeaverCrest;
 
+
 namespace Corpus_Callosum;
 
 [HarmonyPatch]
@@ -51,7 +52,7 @@ public static class Patches
     [HarmonyPostfix]
     private static void ModifyChargeTime(ref float __result)
     {
-        if (HeroController.instance.playerData.CurrentCrestID == "Weaver")
+        if (Globals.Weaver.IsEquipped)
         {
             __result = 0.45f;
         }
@@ -62,17 +63,19 @@ public static class Patches
     [HarmonyPostfix]
     private static void ModifyBeginTime(ref float __result)
     {
-        if (HeroController.instance.playerData.CurrentCrestID == "Weaver")
+        if (Globals.Weaver.IsEquipped)
         {
             __result = 0.25f;
         }
     }
 
+    #region Weaver Exclusives
     [HarmonyPatch(typeof(HeroController), nameof(HeroController.instance.BindCompleted), MethodType.Getter)]
     [HarmonyPostfix]
     private static void WeaverSilkRefund(HeroController __instance)
     {
-        if (PlayerData.instance.CurrentCrestID == "Weaver")
+        Globals.Logger.Log("WeaverSilkRefund");
+        if (Globals.Weaver.IsEquipped)
         {
             __instance.AddSilk(4, true, SilkSpool.SilkAddSource.Normal);
         }
@@ -82,9 +85,31 @@ public static class Patches
     [HarmonyPostfix]
     private static void WeaverSilkGain(HeroController __instance)
     {
-        if (PlayerData.instance.CurrentCrestID == "Weaver")
+        Globals.Logger.Log("WeaverSilkGain");
+        if (Globals.Weaver.IsEquipped)
         {
             __instance.AddSilk(1, true, SilkSpool.SilkAddSource.Normal);
         }
+    }
+
+    // DEBUG TOOL
+    ///*
+    [HarmonyPatch(typeof(HeroController), nameof(HeroController.instance.Jump), MethodType.Getter)]
+    [HarmonyPostfix]
+    private static void WeaverEquip(HeroController __instance)
+    {
+        Globals.Logger.Log("WeaverEquip");
+        if (!Globals.Weaver.IsEquipped)
+        {
+            ToolItemManager.UnlockAllCrests();
+            ToolItemManager.SetEquippedCrest("Weaver");
+            Globals.Logger.Log("Weaver Crest Equipped");
+        }
+        else
+        {
+            Globals.Logger.Log($"Weaver Crest FAILED AT EQUIPPING WHY ARE YOU LIKE THIS\n    Weaver.IsEquipped: {Globals.Weaver.IsEquipped}\n    Crest List: {ToolItemManager.GetAllCrests}");
+        }
+        //*/
+        #endregion
     }
 }
