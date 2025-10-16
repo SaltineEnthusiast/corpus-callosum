@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Corpus_Callosum;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,12 +9,12 @@ namespace Needleforge
     {
         public static void Log(string msg)
         {
-            NeedleforgePlugin.logger.LogInfo(msg);
+            CorpusCallosumPlugin.Log(msg);
         }
 
         public static void LogError(string msg)
         {
-            NeedleforgePlugin.logger.LogError(msg);
+            CorpusCallosumPlugin.Log(msg);
         }
     }
 }
