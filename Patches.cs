@@ -57,7 +57,7 @@ public static class Patches
     [HarmonyPatch(typeof(ToolItemManager), nameof(ToolItemManager.Awake))]
     private static void AddCrests()
     {
-        Globals.Logger.Log("No new class needed");
+        CorpusCallosumPlugin.Log("No new class needed");
         foreach (string name in CorpusCallosumPlugin.crests)
         {
             Sprite RealSprite;
@@ -97,6 +97,7 @@ public static class Patches
                 var actualCrest = CrestMaker.CreateCrest(RealSprite, Silhouette, name, slots);
                 actualCrest.displayName.Key = "Weaver";
                 actualCrest.description.Key = "THE SPIDER IS NOW MORE SPIDER THAN BEFORE YIPPEE";
+                Globals.Weaver = actualCrest;
             }
             else if (name == "Bard")
             {
@@ -122,7 +123,7 @@ public static class Patches
             {
                 RealSprite = null;
                 Silhouette = null;
-                Globals.Logger.Log($"Bro, how did you mess this up, it's literally a single string\nAnyway, here's the name your dumbass entered into CorpusCallosumPlugin.crest: {name}");
+                CorpusCallosumPlugin.Log($"Bro, how did you mess this up, it's literally a single string\nAnyway, here's the name your dumbass entered into CorpusCallosumPlugin.crest: {name}");
             }
         }
 
@@ -131,7 +132,7 @@ public static class Patches
         [HarmonyPostfix]
         static void WeaverSilkRefund(HeroController __instance)
         {
-            Globals.Logger.Log("WeaverSilkRefund");
+            CorpusCallosumPlugin.Log("WeaverSilkRefund");
             if (Globals.Weaver.IsEquipped)
             {
                 __instance.AddSilk(4, true, SilkSpool.SilkAddSource.Normal);
@@ -142,7 +143,7 @@ public static class Patches
         [HarmonyPostfix]
         static void WeaverSilkGain(HeroController __instance)
         {
-            Globals.Logger.Log("WeaverSilkGain");
+            CorpusCallosumPlugin.Log("WeaverSilkGain");
             if (Globals.Weaver.IsEquipped)
             {
                 __instance.AddSilk(1, true, SilkSpool.SilkAddSource.Normal);
@@ -155,16 +156,16 @@ public static class Patches
         [HarmonyPostfix]
         static void WeaverEquip(HeroController __instance)
         {
-            Globals.Logger.Log("WeaverEquip");
+            CorpusCallosumPlugin.Log("WeaverEquip");
             if (!Globals.Weaver.IsEquipped)
             {
                 ToolItemManager.UnlockAllCrests();
                 ToolItemManager.SetEquippedCrest("Weaver");
-                Globals.Logger.Log("Weaver Crest Equipped");
+                CorpusCallosumPlugin.Log("Weaver Crest Equipped");
             }
             else
             {
-                Globals.Logger.Log($"Weaver Crest FAILED AT EQUIPPING WHY ARE YOU LIKE THIS\n    Weaver.IsEquipped: {Globals.Weaver.IsEquipped}\n    Crest List: {ToolItemManager.GetAllCrests}");
+                CorpusCallosumPlugin.Log($"Weaver Crest FAILED AT EQUIPPING WHY ARE YOU LIKE THIS\n    Weaver.IsEquipped: {Globals.Weaver.IsEquipped}\n    Crest List: {ToolItemManager.GetAllCrests}");
             }
             //*/
             #endregion
@@ -177,7 +178,7 @@ public static class Patches
         [HarmonyPostfix]
         public static void AddCrests()
         {
-            Globals.Logger.Log("New class needed");
+            CorpusCallosumPlugin.Log("New class needed");
             foreach (string name in CorpusCallosumPlugin.crests)
             {
                 Sprite RealSprite;
@@ -217,6 +218,7 @@ public static class Patches
                     var actualCrest = CrestMaker.CreateCrest(RealSprite, Silhouette, name, slots);
                     actualCrest.displayName.Key = "Weaver";
                     actualCrest.description.Key = "THE SPIDER IS NOW MORE SPIDER THAN BEFORE YIPPEE";
+                    Globals.Weaver = actualCrest;
                 }
                 else if (name == "Bard")
                 {
@@ -242,7 +244,7 @@ public static class Patches
                 {
                     RealSprite = null;
                     Silhouette = null;
-                    Globals.Logger.Log($"Bro, how did you mess this up, it's literally a single string\nAnyway, here's the name your dumbass entered into CorpusCallosumPlugin.crest: {name}");
+                    CorpusCallosumPlugin.Log($"Bro, how did you mess this up, it's literally a single string\nAnyway, here's the name your dumbass entered into CorpusCallosumPlugin.crest: {name}");
                 }
             }
         }

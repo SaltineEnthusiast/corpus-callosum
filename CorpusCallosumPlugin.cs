@@ -15,9 +15,11 @@ namespace Corpus_Callosum;
 public partial class CorpusCallosumPlugin : BaseUnityPlugin
 {
     public static string[] crests = ["Weaver"];
+    static ManualLogSource logger;
     private void Awake()
     {
-        Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
+        logger = Logger;
+        logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
 
         Harmony.CreateAndPatchAll(typeof(CorpusCallosumPlugin));
         foreach (CrestType crest in Enum.GetValues(typeof(CrestType)))
@@ -71,9 +73,9 @@ public partial class CorpusCallosumPlugin : BaseUnityPlugin
         return slotData;
     }
 
-    public void Log(string text)
+    public static void Log(string text)
     {
-        Logger.LogInfo($"{text}");
+        logger.LogInfo($"{text}");
     }
 
     /*
